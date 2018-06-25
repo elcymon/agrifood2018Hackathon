@@ -1,4 +1,4 @@
-# Agri-food Robotics Workshop - HACKATHON #
+# Agri-food Robotics Workshop - Beetroot Hackathon #
 
 This folder provides an initial set up for solving the beetroot challenge of the Agri-food Robotics 
 workshop 2018.
