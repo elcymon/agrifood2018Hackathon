@@ -5,7 +5,7 @@ class Gripper:
     '''Class to control open and close position of gripper'''
     def __init__(self,port,rate,tOut,pauseTime=15,angleMax=180,angleMin=0,sizeMax=160,sizeMin=0):
         '''initialize with port name, baudrate and timeout for serial'''
-        self.ser = serial.Serial('/dev/'+port,rate,timeout=tOut)
+        self.ser = serial.Serial(port,rate,timeout=tOut)
         self.rate = rate
         self.port = port
         self.serialTimeout = tOut
@@ -37,7 +37,7 @@ class Gripper:
 
         
 if __name__ == '__main__':
-    gripper = Gripper('ttyACM0',9600,0.01)
+    gripper = Gripper('/dev/ttyACM0',9600,0.01)
     gripper.gripTestMinMax()
     # # print gripper.open
     # gripper.moveGripper(gripper.open)
