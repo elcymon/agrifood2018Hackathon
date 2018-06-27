@@ -50,5 +50,4 @@ class BeetRootData:
 
     # function returning 1 if 'beetN.jpg' is good or 0 if it is bad. - N is 'beetroot_num'
     def is_good(self, beetroot_num):
-        return self.labels.is_good[beetroot_num]
-
+        return self.labels.is_bad[beetroot_num]
