@@ -9,6 +9,7 @@ def updateTh(x):
 cv2.namedWindow('Beetroot', cv2.WINDOW_NORMAL)
 cv2.createTrackbar('Sat','Beetroot',22,255,updateTh)
 cv2.createTrackbar('Gray','Beetroot',22,255,updateTh)
+cv2.createTrackbar('GoodBad','Beetroot',28,100,updateTh)
 cv2.namedWindow('Saturation', cv2.WINDOW_NORMAL)
 cv2.namedWindow('Threshold', cv2.WINDOW_NORMAL)
 
@@ -21,10 +22,12 @@ while(True):
     grayTh = cv2.getTrackbarPos('Gray', 'Beetroot')
     ret, gray = cv2.threshold(gray, grayTh, 255, cv2.THRESH_BINARY_INV)
 
+
     cv2.imshow("Threshold", gray)
     hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
     h,s,v = cv2.split(hsv)
 
+    s = cv2.bitwise_and(s,s,mask=gray)
     low = cv2.getTrackbarPos('Sat', 'Beetroot')
 
     ret, s = cv2.threshold(s, low, 255, cv2.THRESH_BINARY)
@@ -42,7 +45,8 @@ while(True):
         id = id + 1
     print(maxSize)
     print(maxId)
-    if maxSize > 28000:
+    goodBad = cv2.getTrackbarPos('GoodBad', 'Beetroot')
+    if maxSize > goodBad*1000:
         #print("This is bad")
         cv2.circle(img,(20, 20), 20, (0,0,225),-1)
     else:
@@ -51,6 +55,7 @@ while(True):
     cv2.drawContours(img, contours, maxId, (0,255,0), 3)
 
     cv2.imshow("Beetroot", img)
+    cv2.imshow("Saturation", s)
 
     k = cv2.waitKey(10) & 0x00FF
     if (k == 27):
